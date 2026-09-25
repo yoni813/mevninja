@@ -1,0 +1,41 @@
+name: S.H.A.F.T. Institutional CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  algorithmic-verification:
+    name: Lint, Quantitative Module Analysis & Unit Testing
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci || npm install
+
+      - name: TypeScript Syntax & Type Integrity Check
+        run: npm run lint
+
+      - name: S.H.A.F.T. Quantitative Risk & Execution Module Analysis
+        run: npm run analyze
+
+      - name: Automated Unit Tests Execution (Vitest)
+        run: npm test
+
+      - name: Production Bundle & Server Compilation
+        run: npm run build

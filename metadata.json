@@ -1,0 +1,10 @@
+{
+  "name": "Remix Remix HFT Algorithmic Trading Workbench",
+  "description": "High-Frequency Trading terminal featuring asynchronous FIX/WebSocket connection manager, sub-millisecond in-memory tick cache, and dynamic MqlTradeRequest slippage adaptation based on terminal ping.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
